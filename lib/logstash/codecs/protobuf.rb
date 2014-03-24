@@ -34,8 +34,11 @@ class LogStash::Codecs::Protobuf < LogStash::Codecs::Base
 
   public
   def decode(data)
+    fields = Hash[data.fields.map{|f| [f.key, f.value]}]
+    fields['tags'] = data['tags']
+    fileds['timestamp'] = data['timestamps']
+    fields['message'] = data['message']
     yield LogStash::Event.new(
-      data.to_hash
     )
   end # def decode
 
