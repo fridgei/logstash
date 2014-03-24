@@ -39,6 +39,7 @@ class LogStash::Codecs::Protobuf < LogStash::Codecs::Base
     fileds['timestamp'] = data['timestamps']
     fields['message'] = data['message']
     yield LogStash::Event.new(
+      fields
     )
   end # def decode
 
